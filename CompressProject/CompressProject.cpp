@@ -35,22 +35,22 @@ void MinHeapify(vector<node>& tree, int heap_size, int i)
 {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-    int largest = i;
+    int lowestValue = i;
 
-    if (left < heap_size && tree[left].letters_count < tree[largest].letters_count)
+    if (left < heap_size && tree[left].letters_count < tree[lowestValue].letters_count)
     {
-        largest = left;
+        lowestValue = left;
     }
 
 
-    if (right < heap_size && tree[right].letters_count < tree[largest].letters_count)
+    if (right < heap_size && tree[right].letters_count < tree[lowestValue].letters_count)
     {
-        largest = right;
+        lowestValue = right;
     }
 
-    if (largest != i)
+    if (lowestValue != i)
     {
-        swap(tree[i], tree[largest]);
+        swap(tree[i], tree[lowestValue]);
     }
 
 }
@@ -67,21 +67,21 @@ void BuildMinHeap(vector<node>& tree)
 
 map<char, int> countLetters(string input)
 {
-    auto weights = map<char, int>();
+    auto letterWithCounts = map<char, int>();
 
     for (unsigned int i = 0; i < input.length(); i++)
     {
-        if (weights.contains(input[i]))
+        if (letterWithCounts.contains(input[i]))
         {
-            weights[input[i]]++;
+            letterWithCounts[input[i]]++;
         }
         else
         {
-            weights.insert(pair(input[i], 1));
+            letterWithCounts.insert(pair(input[i], 1));
         }
     }
 
-    return weights;
+    return letterWithCounts;
 }
 
 vector<node> makeTree()
