@@ -84,11 +84,25 @@ map<char, int> countLetters(string input)
     return letterWithCounts;
 }
 
+void saveDictionary(map<char, int> map)
+{
+    ofstream DictionaryFile("dictionary.txt");
+
+    for (auto it = map.begin(); it != map.end(); it++)
+    {
+        DictionaryFile << "\"" << it->first << "\": \"" << it->second << "\",\n";
+    }
+
+   DictionaryFile.close();
+}
 vector<node> makeTree()
 {
     vector<node> tree;
     string str = openFile();
     map<char, int> map = countLetters(str);
+
+    saveDictionary(map);
+
     auto it = map.begin();
 
     while (it != map.end())
@@ -146,6 +160,8 @@ void createFullLable(vector<node>& tree)
         tree.push_back(newnode);
         BuildMinHeap(tree);
     }
+
+
 }
 int main()
 {
